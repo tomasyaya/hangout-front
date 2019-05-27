@@ -31,7 +31,7 @@ export default class AuthProvider extends Component {
   state = {
     isLogged: false,
     user: {},
-    status: 'loading'
+    status: 'loaded'
   }
 
   setUser = (user) => {
@@ -68,23 +68,23 @@ export default class AuthProvider extends Component {
       .catch(error => console.log(error))
   }
 
-  componentDidMount() {
-    authService.me()
-      .then((user) => {
-        this.setState({
-          isLogged: true,
-          user,
-          status: 'loaded'
-        })
-      })
-      .catch((error) => {
-        this.setState({ 
-          isLogged: false,
-          user: {},
-          status: 'loaded'
-        });
-      })
-  }
+  // componentDidMount() {
+  //   authService.me()
+  //     .then((user) => {
+  //       this.setState({
+  //         isLogged: true,
+  //         user,
+  //         status: 'loaded'
+  //       })
+  //     })
+  //     .catch((error) => {
+  //       this.setState({ 
+  //         isLogged: false,
+  //         user: {},
+  //         status: 'loaded'
+  //       });
+  //     })
+  // }
 
   render() {
     const { isLogged, user, status } = this.state;

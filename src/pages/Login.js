@@ -22,6 +22,8 @@ class Login extends Component {
 
   render() {
     const { username, password } = this.state;
+    console.log(this.props, this.state)
+
     return (
       <form onSubmit={this.handleFormSubmit}>
         <label>Username:</label>

@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { withAuth } from '../providers/AuthProvider';
+import { connect } from 'react-redux';
+import { getUser } from '../redux/actions/actions';
 
-const AnonRoute = ({ component: Component, isLogged, ...rest }) => {
+
+const AnonRoute = props => {
+
+  const { component: Component, isLogged, getUser, ...rest } = props;
+  const [ load, setLoad ] = useState(false)
+
+  useEffect(() => {
+    ( async() => {
+      try{
+        await getUser()
+        setLoad(true)
+      }
+      catch(err) {
+        console.log(err)
+      }
+    })()
+  }, [])
+
+  const displayRoute = load ? <Route {...rest} 
+    render={props => !isLogged ? <Component {...props} /> : <Redirect to={{ pathname: '/private', state: { from: props.location } }} />}
+    /> : null;
+
   return (
-    <Route
-      {...rest}
-      render={props => {
-        if (!isLogged) {
-          return <Component {...props} />
-        } else {
-          return <Redirect to={{ pathname: '/private', state: { from: props.location } }} />
-        }
-      }
-      }
-    />
+    <div>
+      { displayRoute }
+    </div>
   )
 }
-export default withAuth(AnonRoute);
+
+const mapStateToProps = state => {
+  return{
+    isLogged: state.auth.isLoggin
+  }
+}
+export default connect(mapStateToProps, { getUser })(AnonRoute);
