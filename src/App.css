@@ -1,6 +1,9 @@
 body {
   margin: 0;
-  padding: 0
+  padding: 0;
+  max-width: 500px;
+  max-height: 900px;
+  margin: auto;
 }
 
 p, h1, h2, h3, h4 {
