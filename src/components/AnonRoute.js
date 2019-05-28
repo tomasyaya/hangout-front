@@ -10,7 +10,7 @@ const AnonRoute = props => {
   const [ load, setLoad ] = useState(false)
 
   useEffect(() => {
-    ( async() => {
+    ( async () => {
       try{
         await getUser()
         setLoad(true)

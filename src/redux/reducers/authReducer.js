@@ -1,4 +1,4 @@
-import { GET_USER } from '../actions/actionTypes';
+import { GET_USER, LOGOUT } from '../actions/actionTypes';
 
 const initialState = {
   isLoggin: false,
@@ -14,6 +14,12 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isLoggin: log,
         user: userInfo
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        isLoggin: false,
+        user: {}
       }
     default:
       return {

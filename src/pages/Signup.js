@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withAuth } from '../providers/AuthProvider';
+import { connect } from 'react-redux';
+import { getUser, login } from '../redux/actions/actions';
+
 
 class Signup extends Component {
 
@@ -9,19 +11,17 @@ class Signup extends Component {
     password: "",
   };
 
-  handleFormSubmit = (event) => {
+  handleFormSubmit = async event => {
     event.preventDefault();
-    const username = this.state.username;
-    const password = this.state.password;
-
-    this.props.signup({ username, password })
-      .then(() => {
-        this.setState({
-            username: "",
-            password: "",
-        });
-      })
-      .catch(error => console.log(error) )
+    const { username, password } = this.state;
+    const { getUser, login } = this.props;
+    try {
+      await login({ username, password }, 'signup');
+      await getUser();
+    }
+    catch(err) {
+      console.log(err)
+    }
   }
 
   handleChange = (event) => {  
@@ -50,4 +50,5 @@ class Signup extends Component {
   }
 }
 
-export default withAuth(Signup);
+
+export default connect(null, { getUser, login })(Signup);

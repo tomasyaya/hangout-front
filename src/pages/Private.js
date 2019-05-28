@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { withAuth } from '../providers/AuthProvider';
 
-class Private extends Component {
-  render() {
-    console.log(this.props)
-    return (
-      <div>
-        <h1>Welcome </h1>
-      </div>
-    )
-  }
+
+const Private = () => {
+  return (
+    <div>
+      <h1>Welcome </h1>
+    </div>
+  )
 }
 
 const mapStateToPros = state => {

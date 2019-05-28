@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
-import { withAuth } from '../providers/AuthProvider';
+import { connect } from 'react-redux';
+import { getUser, login } from '../redux/actions/actions';
+
+
 class Login extends Component {
   state = {
     username: "",
     password: "",
   }
 
-  handleFormSubmit = (event) => {
+  handleFormSubmit = async event => {
     event.preventDefault();
-    const { username, password } = this.state
-
-    this.props.login({ username, password })
-      .then(() => {})
-      .catch( error => console.log(error) )
+    const { username, password } = this.state;
+    const { getUser, login } = this.props;
+    try {
+      await login({ username, password })
+      await getUser()
+    }
+    catch(err) {
+      console.log(err)
+    }
   }
 
-  handleChange = (event) => {  
+  handleChange = event => {  
     const {name, value} = event.target;
     this.setState({[name]: value});
   }
 
   render() {
     const { username, password } = this.state;
-    console.log(this.props, this.state)
-
     return (
       <form onSubmit={this.handleFormSubmit}>
         <label>Username:</label>
@@ -36,4 +41,7 @@ class Login extends Component {
   }
 }
 
-export default withAuth(Login);
+
+
+
+export default connect(null, { getUser, login })(Login);

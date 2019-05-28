@@ -1,10 +1,9 @@
-import { GET_USER } from './actionTypes';
+import { GET_USER, LOGOUT } from './actionTypes';
 import authService from '../../lib/auth-service';
 
 export const getUser = () => async dispatch => {
   try {
     const user = await authService.me()
-    console.log('user', user)
     if(user) {
       dispatch({
         type: GET_USER,
@@ -25,6 +24,42 @@ export const getUser = () => async dispatch => {
       })
       return
     }
+  }
+  catch(err) {
+    console.log(err)
+  }
+}
+
+export const logout = () => async dispatch => {
+  try {
+    await authService.logout()
+    dispatch({
+      type: LOGOUT
+    })
+  }
+  catch(err) {
+    console.log(err)
+  }
+}
+
+//  ACTION LOGIN IS USE FOR SIGNUP AND LOGIN
+
+export const login = (body, signup) => async dispatch => {
+  try {
+    if(!signup) { 
+      await authService.login(body)
+    }
+    if(signup) { 
+      await authService.signup(body)
+    }
+    const user = await authService.me()
+    dispatch({
+      type: GET_USER,
+      payload: {
+        log: true,
+        userInfo: user
+      }
+    })
   }
   catch(err) {
     console.log(err)
