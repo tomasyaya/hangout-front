@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUser } from '../redux/actions/actions';
+import { getUser } from '../../redux/actions/actions';
 
 
-const PrivateRoute = props => {
+const AnonRoute = props => {
+
   const { component: Component, isLogged, getUser, ...rest } = props;
   const [ load, setLoad ] = useState(false)
 
   useEffect(() => {
-    ( async() => {
+    ( async () => {
       try{
         await getUser()
         setLoad(true)
@@ -20,10 +21,10 @@ const PrivateRoute = props => {
     })()
   }, [])
 
-const displayRoute = load ? <Route {...rest} 
-  render={props => isLogged ? <Component {...props} /> : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
-  /> : null;
-      
+  const displayRoute = load ? <Route {...rest} 
+    render={props => !isLogged ? <Component {...props} /> : <Redirect to={{ pathname: '/private', state: { from: props.location } }} />}
+    /> : null;
+
   return (
     <div>
       { displayRoute }
@@ -32,11 +33,8 @@ const displayRoute = load ? <Route {...rest}
 }
 
 const mapStateToProps = state => {
-  return {
-    user: state.auth.user,
+  return{
     isLogged: state.auth.isLoggin
   }
 }
-
-
-export default connect(mapStateToProps, { getUser })(PrivateRoute);
+export default connect(mapStateToProps, { getUser })(AnonRoute);

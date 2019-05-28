@@ -12,6 +12,7 @@ class AuthService {
     const { username, password } = user;
     try {
       const { data } = await this.auth.post('/auth/signup', {username, password});
+      console.log(data)
       return data
     }
     catch(err) {

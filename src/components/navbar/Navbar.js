@@ -1,20 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logout } from '../redux/actions/actions';
+import { logout } from '../../redux/actions/actions';
 
 const Navbar = props => {
   const { isLogged, user, logout } = props;
-  const { username } = user;
+  console.log(user)
   if (isLogged) {
+    // const { username } = user;
     return <div>
-      <p>username: { username }</p>
+      <p>username: </p>
       <p onClick={logout}>Logout</p>
     </div>
-  } else {
+  } 
+  else {
     return <div>
-      <Link to='/login'>Login</Link>
-      <Link to='/signup'>Signup</Link>
+      
     </div>
   }
 }
