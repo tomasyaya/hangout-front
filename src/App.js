@@ -8,6 +8,7 @@ import Navbar from './components/navbar/Navbar';
 import Private from './pages/Private';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
+import './App.css';
 
 
 const App = () => {

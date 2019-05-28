@@ -22,7 +22,7 @@ const AnonRoute = props => {
   }, [])
 
   const displayRoute = load ? <Route {...rest} 
-    render={props => !isLogged ? <Component {...props} /> : <Redirect to={{ pathname: '/private', state: { from: props.location } }} />}
+    render={props => !isLogged ? <Component {...props} /> : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
     /> : null;
 
   return (
