@@ -8,26 +8,46 @@ class AuthService {
     })
   }
 
-  signup(user) {
+  async signup(user) {
     const { username, password } = user;
-    return this.auth.post('/auth/signup', {username, password})
-      .then(({ data }) => data);
+    try {
+      const { data } = await this.auth.post('/auth/signup', {username, password});
+      return data
+    }
+    catch(err) {
+      console.log(err)
+    }
   }
 
-  login(user) {
+  async login(user) {
     const { username, password } = user;
-    return this.auth.post('/auth/login', {username, password})
-      .then(({ data }) => data);
+    try {
+      const { data } = await this.auth.post('/auth/login', {username, password});
+      return data
+    }
+    catch(err) {
+      console.log(err)
+    }
   }
 
-  logout() {
-    return this.auth.post('/auth/logout', {})
-      .then(response => response.data)
+  async logout() {
+    try {
+      const { data } = await this.auth.post('/auth/logout', {});
+      return data
+    }
+    catch(err) {
+      console.log(err)
+    }
   }
 
-  me(user) {
-    return this.auth.get('/auth/me')
-    .then(response => response.data)
+  async me() {
+    try {
+      const { data } = await this.auth.get('/auth/me');
+      return data
+    }
+    catch(err) {
+      console.log(err)
+    }
   }
 }
 
