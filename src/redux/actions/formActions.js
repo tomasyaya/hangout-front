@@ -1,5 +1,6 @@
 import { HANDLE_CHANGE, HANDLE_SUBMIT } from './actionTypes';
 import guideService from '../../lib/guide-service';
+import { checkEmptyFields } from '../../helpers/validations';
 
 export const handleChange = event => dispatch => {
   const { name, value } = event.target;
@@ -9,17 +10,31 @@ export const handleChange = event => dispatch => {
       body: {
         [name]: value
       },
-      emptyObj: false
+      emptyObj: false,
+      validation: false
     }
   }) 
 }
 
-export const handleSubmit = (event, body) => async dispatch => {
+export const handleSubmit = (event, body, fields) => async dispatch => {
   event.preventDefault();
+
   try {
+    if(checkEmptyFields(fields)){
+      dispatch({
+        type: HANDLE_SUBMIT,
+        payload: {
+          validation: true
+        }
+      })
+      return
+    }
     await guideService.createGuide(body)
     dispatch({
-      type: HANDLE_SUBMIT
+      type: HANDLE_SUBMIT,
+      payload: {
+        validation: false
+      }
     })
   }
   catch(err) {

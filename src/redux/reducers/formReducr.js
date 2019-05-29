@@ -2,7 +2,8 @@ import { HANDLE_CHANGE, HANDLE_SUBMIT } from '../actions/actionTypes';
 
 const initialState = {
   emptyObj: true,
-  body: {}
+  body: {},
+  validation: false
 }
 
 const formReducer = (state = initialState, action) => {

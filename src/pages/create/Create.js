@@ -7,15 +7,18 @@ import './create.css';
 
 const Create = props => {
 
-  const { handleSubmit, handleChange, body, emptyObj } = props;
+  const { handleSubmit, handleChange, body, emptyObj, validation } = props;
+
+  console.log(validation)
 
   const title = !emptyObj ? body.title : ''; 
   const location = !emptyObj ? body.location : '';
+  const fields = !emptyObj ? [body.title, body.location] : [];
   
   return(
     <div className="create-main-container">
 
-      <Form payload={ body } handleSubmit={ handleSubmit }>
+      <Form payload={ body } fields={ fields } handleSubmit={ handleSubmit }>
         <Input name="title" value={ title } handleChange={ handleChange }/>
         <Input name="location" value={ location } handleChange={ handleChange }/>
         <button type="submit">
@@ -30,7 +33,8 @@ const Create = props => {
 const mapStateToProps = state => {
   return {
     body: state.form.body,
-    emptyObj: state.form.emptyObj
+    emptyObj: state.form.emptyObj,
+    validation: state.form.validation
   }
 }
 

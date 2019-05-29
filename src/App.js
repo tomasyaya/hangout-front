@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import authService from './lib/auth-service';
+import { getGuides } from './redux/actions/guideActions';
 import Footer from './components/footer/Footer';
 import PrivateRoute from './components/routes/PrivateRoute';
 import AnonRoute from './components/routes/AnonRoute';
@@ -15,15 +15,16 @@ import './App.css';
 
 
 const App = props => {
-  const { isLoggin } = props;
+  const { isLoggin, getGuides, guides } = props;
 
-  // useEffect(() => {
-  //   (async() => {
-  //     await authService.logout()
-  //   })()
-  // }, [])
+  useEffect(() => {
+    (async() => {
+      await getGuides()
+    })()
+  }, [])
   const navbar = isLoggin ? <Navbar /> : null;
   const footer = isLoggin ? <Footer /> : null;
+  console.log(guides)
   return (
     <div className="container">
       { navbar }
@@ -41,8 +42,9 @@ const App = props => {
 
 const mapStateToProps = state => {
   return{
-    isLoggin: state.auth.isLoggin 
+    isLoggin: state.auth.isLoggin,
+    guides: state.guide.guides 
   }
 }
 
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, { getGuides })(App);
