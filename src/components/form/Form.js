@@ -1,5 +1,5 @@
 import React from 'react';
-import { func, object } from 'prop-types';
+import { func, object, array } from 'prop-types';
 import './form.css';
 
 const Form = props => {
@@ -14,7 +14,8 @@ const Form = props => {
 
 Form.propTypes = {
   handleSubmit: func,
-  payload: object
+  payload: object,
+  fields: array
 }
 
 export default Form;

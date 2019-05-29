@@ -18,7 +18,6 @@ export const handleChange = event => dispatch => {
 
 export const handleSubmit = (event, body, fields) => async dispatch => {
   event.preventDefault();
-
   try {
     if(checkEmptyFields(fields)){
       dispatch({

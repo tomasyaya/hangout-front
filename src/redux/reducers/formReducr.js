@@ -17,13 +17,16 @@ const formReducer = (state = initialState, action) => {
           ...state.body,
           ...body
         },
-        emptyObj
+        emptyObj,
+        validation: false
       }
     case HANDLE_SUBMIT:
+      const { validation } = payload
       return {
         ...state,
         body: {},
-        emptyObj: true
+        emptyObj: true,
+        validation 
       }  
     default:
       return{

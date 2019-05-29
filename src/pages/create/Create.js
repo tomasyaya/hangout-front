@@ -9,15 +9,14 @@ const Create = props => {
 
   const { handleSubmit, handleChange, body, emptyObj, validation } = props;
 
-  console.log(validation)
-
   const title = !emptyObj ? body.title : ''; 
   const location = !emptyObj ? body.location : '';
-  const fields = !emptyObj ? [body.title, body.location] : [];
+  const fields = !emptyObj ? [body.title || '', body.location || ''] : ['',''];
+  const validationMessage = validation ? <p>{ "Please complete all fields" }</p> : null;
   
   return(
     <div className="create-main-container">
-
+      { validationMessage }
       <Form payload={ body } fields={ fields } handleSubmit={ handleSubmit }>
         <Input name="title" value={ title } handleChange={ handleChange }/>
         <Input name="location" value={ location } handleChange={ handleChange }/>
