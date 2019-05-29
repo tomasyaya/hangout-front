@@ -1,16 +1,18 @@
 import React from 'react';
 import { func, string } from 'prop-types';
+import './input.css';
 
 const Input = props => {
-  const { value, handleChange } = props
+  const { value, handleChange, name } = props
   return(
-    <input type="text" value={ value } onChange={ handleChange }/>
+    <input className="input" type="text" name={ name } value={ value } onChange={ handleChange }/>
   )
 }
 
 Input.propTypes = {
   value: string,
-  handleChange: func
+  handleChange: func,
+  name: string
 }
 
 export default Input;
