@@ -1,4 +1,5 @@
 import { HANDLE_CHANGE, HANDLE_SUBMIT } from './actionTypes';
+import guideService from '../../lib/guide-service';
 
 export const handleChange = event => dispatch => {
   const { name, value } = event.target;
@@ -13,9 +14,15 @@ export const handleChange = event => dispatch => {
   }) 
 }
 
-export const handleSubmit = event => dispatch => {
+export const handleSubmit = (event, body) => async dispatch => {
   event.preventDefault();
-  dispatch({
-    type: HANDLE_SUBMIT
-  })
+  try {
+    await guideService.createGuide(body)
+    dispatch({
+      type: HANDLE_SUBMIT
+    })
+  }
+  catch(err) {
+    console.log(err)
+  }
 }

@@ -10,7 +10,8 @@ class GuideService {
 
   async createGuide(body){
     try {
-      const { data } = this.guide.post('/guides', body);
+      const { data }  = await this.guide.post('/guides', body);
+      console.log(data)
       return data
     }
     catch(err) {

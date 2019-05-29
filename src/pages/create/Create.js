@@ -8,19 +8,21 @@ import './create.css';
 const Create = props => {
 
   const { handleSubmit, handleChange, body, emptyObj } = props;
-  
+
   const title = !emptyObj ? body.title : ''; 
-  const description = !emptyObj ? body.description : '';
+  const location = !emptyObj ? body.location : '';
   
   return(
     <div className="create-main-container">
-      <Form handleSubmit={ handleSubmit }>
+
+      <Form payload={ body } handleSubmit={ handleSubmit }>
         <Input name="title" value={ title } handleChange={ handleChange }/>
-        <Input name="description" value={ description } handleChange={ handleChange }/>
+        <Input name="location" value={ location } handleChange={ handleChange }/>
         <button type="submit">
           Create
         </button>
       </Form>
+
     </div>
   )
 }

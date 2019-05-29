@@ -1,18 +1,19 @@
 import React from 'react';
-import { func } from 'prop-types';
+import { func, object } from 'prop-types';
 import './form.css';
 
 const Form = props => {
-  const { children, handleSubmit } = props;
+  const { children, handleSubmit, payload } = props;
   return(
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={ (e) => handleSubmit(e, payload)}>
       { children }
     </form>
   ) 
 }
 
 Form.propTypes = {
-  handleSubmit: func
+  handleSubmit: func,
+  payload: object
 }
 
 export default Form;
