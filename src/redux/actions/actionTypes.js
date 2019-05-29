@@ -6,6 +6,7 @@ export const LOGIN = "LOGIN";
 
 // GUIDE ACTIONS TYPE
 export const GET_GUIDES = "GET_GUIDES";
+export const GET_GUIDE = "GET_GUIDE";
 export const CREATE_GUIDE = "CREATE_GUIDE";
 
 // FORM ACTIONS TYPE

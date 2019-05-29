@@ -28,6 +28,16 @@ class GuideService {
     }
   }
 
+  async getGuide(id) {
+    try {
+      const { data } = await this.guide.get(`/guides/${id}`)
+      return data
+    }
+    catch(err) {
+      console.log(err)
+    }
+  }
+
   async deleteGuide(id) {
     try {
       await this.guide.delete(`/guides/${id}`)

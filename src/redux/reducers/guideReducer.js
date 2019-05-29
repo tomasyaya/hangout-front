@@ -1,4 +1,4 @@
-import { GET_GUIDES } from '../actions/actionTypes';
+import { GET_GUIDES, GET_GUIDE } from '../actions/actionTypes';
 
 const initialState = {
   guides: [],
@@ -11,6 +11,11 @@ const guidesReducer = (state = initialState, action) => {
     case GET_GUIDES:
       return {
         guides: [...payload]
+      }
+    case GET_GUIDE:
+      return {
+        ...state,
+        guide: payload
       }
     default:
       return {

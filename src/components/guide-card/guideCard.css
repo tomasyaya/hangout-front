@@ -8,3 +8,8 @@
   justify-content: space-between;
   align-items: baseline;
 }
+
+.guide-card-actions {
+  display: flex;
+  flex-direction: column;
+}

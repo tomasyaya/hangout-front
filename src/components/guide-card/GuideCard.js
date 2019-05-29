@@ -1,5 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteGuide } from '../../redux/actions/guideActions';
 import './guideCard.css';
@@ -14,9 +15,14 @@ const GuideCard = props => {
         <p>{ title }</p>
         <p>{ location }</p>
       </div>
-      <button onClick={() => deleteGuide(id)}>
-        x
-      </button>
+      <div className="guide-card-actions">
+        <button onClick={() => deleteGuide(id)}>
+          x
+        </button>
+        <Link to={`/guides/${id}`}>
+          more
+        </Link>
+      </div>
     </div>
   )
 }

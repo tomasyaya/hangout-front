@@ -8,7 +8,7 @@ import AnonRoute from './components/routes/AnonRoute';
 import Create from './pages/create/Create';
 import Home from './pages/home/Home';
 import Navbar from './components/navbar/Navbar';
-import Private from './pages/Private';
+import GuideDetail from './pages/guide-detail/GuideDetail';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 import './App.css';
@@ -31,8 +31,8 @@ const App = props => {
       <Switch>
         <AnonRoute path="/signup" component={ Signup } />
         <AnonRoute path="/login" component={ Login } />
+        <PrivateRoute path="/guides/:id" component={ GuideDetail } />
         <PrivateRoute path="/create" component={ Create } />
-        <PrivateRoute path="/private" component={ Private } />
         <PrivateRoute exact path="/" component={ Home } />
       </Switch>
       { footer }

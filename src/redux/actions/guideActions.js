@@ -1,6 +1,19 @@
-import { GET_GUIDES, HANDLE_SUBMIT } from './actionTypes';
+import { GET_GUIDES, HANDLE_SUBMIT, GET_GUIDE } from './actionTypes';
 import guideService from '../../lib/guide-service';
 import { checkEmptyFields } from '../../helpers/validations';
+
+export const getGuide = id => async dispatch => {
+  try {
+    const guide = await guideService.getGuide(id)
+    dispatch({
+      type: GET_GUIDE,
+      payload: guide
+    })
+  }
+  catch(err) {
+    console.log(err)
+  }
+}
 
 export const getGuides = () => async dispatch => {
   try {
@@ -59,3 +72,4 @@ export const deleteGuide = id => async dispatch => {
     console.log(err)
   }
 }
+
