@@ -19,9 +19,21 @@ const Create = props => {
   return(
     <div className="create-main-container">
       { validationMessage }
-      <Form payload={ body } fields={ fields } handleSubmit={ createGuide }>
-        <Input name="title" value={ title } handleChange={ handleChange }/>
-        <Input name="location" value={ location } handleChange={ handleChange }/>
+      <Form 
+        payload={ body } 
+        fields={ fields } 
+        handleSubmit={ createGuide }
+        >
+        <Input 
+          name="title" 
+          value={ title } 
+          handleChange={ handleChange }
+          />
+        <Input 
+          name="location" 
+          value={ location } 
+          handleChange={ handleChange }
+          />
         <button type="submit">
           Create
         </button>

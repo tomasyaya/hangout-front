@@ -27,6 +27,15 @@ class GuideService {
       console.log(err)
     }
   }
+
+  async deleteGuide(id) {
+    try {
+      await this.guide.delete(`/guides/${id}`)
+    }
+    catch(err) {
+      console.log(err)
+    }
+  }
 }
 
 const guideService = new GuideService();

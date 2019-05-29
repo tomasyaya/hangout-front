@@ -45,3 +45,17 @@ export const createGuide = (event, body, fields) => async dispatch => {
     console.log(err)
   }
 }
+
+export const deleteGuide = id => async dispatch => {
+  try {
+    await guideService.deleteGuide(id);
+    const guides = await guideService.getGuides();
+    dispatch({
+      type: GET_GUIDES,
+      payload: guides
+    })
+  }
+  catch(err){
+    console.log(err)
+  }
+}
