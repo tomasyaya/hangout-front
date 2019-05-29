@@ -46,11 +46,15 @@ export const logout = () => async dispatch => {
 
 export const login = (body, signup) => async dispatch => {
   try {
-    if(!signup) { 
-      await authService.login(body)
-    }
+
     if(signup) { 
       await authService.signup(body)
+    }
+    if(!signup) { 
+      var correctLogin = await authService.login(body)
+    }
+    if(!correctLogin) {
+      return
     }
     const user = await authService.me()
     dispatch({

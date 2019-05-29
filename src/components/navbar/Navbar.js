@@ -5,8 +5,10 @@ import { logout } from '../../redux/actions/actions';
 import './navbar.css';
 
 const Navbar = props => {
-  const { user, logout, history: { goBack } } = props;
+  const { user, logout, history: { goBack }, isLoggin } = props;
+
   const { username } = user;
+
   return (
   <div className="navbar">
     <p onClick={goBack}>
@@ -20,7 +22,8 @@ const Navbar = props => {
 
 const mapStateToProps = state => {
   return{
-    user: state.auth.user
+    user: state.auth.user,
+    isLoggin: state.auth.isLoggin
   }
 }
 

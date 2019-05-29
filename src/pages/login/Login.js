@@ -14,6 +14,9 @@ class Login extends Component {
     event.preventDefault();
     const { username, password } = this.state;
     const { getUser, login } = this.props;
+    if(!username || !password) {
+      return
+    }
     try {
       await login({ username, password })
       await getUser()

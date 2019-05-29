@@ -24,6 +24,7 @@ class AuthService {
     const { username, password } = user;
     try {
       const { data } = await this.auth.post('/auth/login', {username, password});
+      console.log(data)
       return data
     }
     catch(err) {

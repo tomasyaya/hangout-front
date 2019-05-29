@@ -15,6 +15,9 @@ class Signup extends Component {
     event.preventDefault();
     const { username, password } = this.state;
     const { getUser, login } = this.props;
+    if(!username || !password) {
+      return
+    }
     try {
       await login({ username, password }, 'signup');
       await getUser();
@@ -48,4 +51,4 @@ class Signup extends Component {
 }
 
 
-export default connect(null, { getUser, login })(Signup);
+export default connect(null, { getUser, login  })(Signup);
