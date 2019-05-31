@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getGuide } from '../../redux/actions/guideActions';
 
 const GuideDetail = props => {
+
   const { id } = props.match.params;
-  const { guide, getGuide } = props;
-  console.log(guide)
+  const { guide , getGuide } = props;
+  
+  const [ load, setLoad ] = useState(false);
+
+  const title = load ? guide.title : null;
+  const location = load ? guide.location : null;
 
   useEffect(() => {
     ( async () => {
       try {
         await getGuide(id)
+        setLoad(true)
       } catch(err) {
         console.log(err)
       }
@@ -20,7 +26,8 @@ const GuideDetail = props => {
   
   return(
     <div>
-      <h3>Guide</h3>
+      <h3>{ title }</h3>
+      <p>{ location }</p>
     </div>
   )
 }

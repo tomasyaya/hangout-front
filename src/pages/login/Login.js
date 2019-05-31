@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getUser, login } from '../../redux/actions/actions';
@@ -38,13 +38,10 @@ const Login = props => {
   )
 }
 
-
-
 const mapStateToProps = state => {
   return{
     body: state.form.body
   }
 }
-
 
 export default connect(mapStateToProps, { getUser, login, handleChange })(Login);
