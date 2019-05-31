@@ -2,18 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getUser, login } from '../../redux/actions/actions';
+import { handleChange } from '../../redux/actions/formActions';
 import './login.css';
 
-class Login extends Component {
-  state = {
-    username: "",
-    password: "",
-  }
-
-  handleFormSubmit = async event => {
+const Login = props => {
+  const { handleChange, body: { password, username } } = props;
+  
+  const handleFormSubmit = async event => {
     event.preventDefault();
-    const { username, password } = this.state;
-    const { getUser, login } = this.props;
+    const { getUser, login, body: { username, password } } = props;
     if(!username || !password) {
       return
     }
@@ -25,31 +22,29 @@ class Login extends Component {
       console.log(err)
     }
   }
-
-  handleChange = event => {  
-    const {name, value} = event.target;
-    this.setState({[name]: value});
-  }
-
-  render() {
-    const { username, password } = this.state;
-    return (
-      <div className="login-main-container">
-        <h3>Login</h3>
-        <form  className="login-form" onSubmit={this.handleFormSubmit}>
-          <input type="text" placeholder="username" name="username" value={username} onChange={this.handleChange}/>
-          <input type="password" placeholder="password" name="password" value={password} onChange={this.handleChange} />
-          <button type="submit">Go</button>
-        </form>
-        <div className="signup-link">
-         You dont have an account? <Link to='/signup'>Signup</Link>
-        </div>
+   
+  return (
+    <div className="login-main-container">
+      <h3>Login</h3>
+      <form  className="login-form" onSubmit={ handleFormSubmit }>
+        <input type="text" placeholder="username" name="username" value={ username } onChange={ handleChange }/>
+        <input type="password" placeholder="password" name="password" value={ password } onChange={ handleChange } />
+        <button type="submit">Go</button>
+      </form>
+      <div className="signup-link">
+        You dont have an account? <Link to='/signup'>Signup</Link>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 
 
+const mapStateToProps = state => {
+  return{
+    body: state.form.body
+  }
+}
 
-export default connect(null, { getUser, login })(Login);
+
+export default connect(mapStateToProps, { getUser, login, handleChange })(Login);
